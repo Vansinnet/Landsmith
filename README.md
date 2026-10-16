@@ -6,6 +6,8 @@ Fast terrain shaping for the Hoe: level, raise or lower, smooth, straight slopes
 
 **Status: Runtime-pending.** The mod compiles against Valheim 1.0.20 and its shaping logic is covered by automated tests, but it has not yet been observed in a live game. Use it on a backed-up world.
 
+**Download:** [GitHub releases](https://github.com/Vansinnet/Landsmith/releases). Take the newest release (marked *Pre-release* while the mod is Runtime-pending), download `Landsmith-<version>.zip` under *Assets* and extract it into `BepInEx/plugins/Landsmith/`.
+
 ## Why It Stays Fast
 
 Valheim's terrain only knows a few operations (level to one height, raise, smooth, paint). A shape such as a straight ramp built from those would need hundreds of operations per click, and every operation recompresses and resends the terrain data of each 64 m zone and rebuilds its mesh.
