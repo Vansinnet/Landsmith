@@ -1,0 +1,48 @@
+<Project>
+  <!--
+    Mod projects declare game and BepInEx assemblies by name:
+      <GameReference Include="BepInEx;0Harmony;assembly_valheim;UnityEngine.CoreModule" />
+    They resolve from reference/assemblies/ (populated by scripts/Update-Reference.ps1) and are never copied to the output.
+    Another mod's API (compatibility patches) is referenced by a path relative to the repository root:
+      <ModReference Include="reference/mods/SomeMod/1.2.3/SomeMod.dll" />
+    Record that mod's version and SHA-256 in docs/CONTRACTS.md; reference/ is machine-local.
+    Mod metadata (PluginGuid, PluginName, Version) is generated into the internal ModInfo class.
+  -->
+  <ItemGroup Condition="'$(IsValheimMod)' == 'true'">
+    <Reference Include="@(GameReference->'$(ValheimReferenceDir)%(Identity).dll')" Private="false" />
+    <Reference Include="@(ModReference->'$(RepoRoot)%(Identity)')" Private="false" />
+  </ItemGroup>
+
+  <Target Name="CheckValheimReferences" BeforeTargets="ResolveAssemblyReferences" Condition="'$(IsValheimMod)' == 'true'">
+    <Error Condition="!Exists('$(ValheimReferenceDir)assembly_valheim.dll')"
+           Text="Reference assemblies are missing in $(ValheimReferenceDir). Run scripts/Update-Reference.ps1 (see docs/setup.md)." />
+    <Error Condition="!Exists('$(ValheimReferenceDir)%(GameReference.Identity).dll')"
+           Text="Unknown GameReference '%(GameReference.Identity)': $(ValheimReferenceDir)%(GameReference.Identity).dll does not exist." />
+    <Error Condition="!Exists('$(RepoRoot)%(ModReference.Identity)')"
+           Text="ModReference '%(ModReference.Identity)' does not exist. Copy that mod's DLL into reference/mods/ (docs/third-party-mods.md)." />
+  </Target>
+
+  <Target Name="GenerateModInfo" BeforeTargets="CoreCompile" Condition="'$(IsValheimMod)' == 'true'">
+    <Error Condition="'$(PluginGuid)' == '' or '$(PluginName)' == '' or '$(Version)' == ''"
+           Text="Set Version, PluginGuid and PluginName in $(MSBuildProjectFile)." />
+    <PropertyGroup>
+      <_ModInfoFile>$(IntermediateOutputPath)ModInfo.g.cs</_ModInfoFile>
+      <_ModInfoText>// &lt;auto-generated/&gt; Generated from $(MSBuildProjectFile). Do not edit.
+namespace $(RootNamespace)
+{
+    internal static class ModInfo
+    {
+        public const string Guid = &quot;$(PluginGuid)&quot;%3B
+        public const string Name = &quot;$(PluginName)&quot;%3B
+        public const string Version = &quot;$(Version)&quot;%3B
+    }
+}
+</_ModInfoText>
+    </PropertyGroup>
+    <WriteLinesToFile File="$(_ModInfoFile)" Lines="$(_ModInfoText)" Overwrite="true" WriteOnlyWhenDifferent="true" />
+    <ItemGroup>
+      <Compile Include="$(_ModInfoFile)" />
+      <FileWrites Include="$(_ModInfoFile)" />
+    </ItemGroup>
+  </Target>
+</Project>

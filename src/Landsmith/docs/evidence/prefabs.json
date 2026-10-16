@@ -1,0 +1,157 @@
+{
+  "inspectedDate": "2026-10-15",
+  "gameVersion": "1.0.20",
+  "tool": "UnityPy 1.25.0 (scripts/tools/inspect_prefabs.py and a read-only PPtr resolver over the same bundle)",
+  "source": "valheim_Data/StreamingAssets/SoftRef/Bundles/c4210710",
+  "sourceSha256": "2FDCF6840C7A5EA64A3F19B63BB3047D5884C202BA67B7AFC997491F635A1B55",
+  "status": "Source-verified",
+  "hoe": {
+    "item": "Hoe",
+    "pieceTable": "_HoePieceTable",
+    "pieceTableFlags": {
+      "m_canRemovePieces": false,
+      "m_hideAdvancedMenu": true,
+      "m_categories": []
+    },
+    "pieces": [
+      "mud_road_v2",
+      "raise_v2",
+      "path_v2",
+      "paved_road_v2",
+      "Placeable_Stone",
+      "placeable_bigrock_02",
+      "placeable_bigrock_01"
+    ]
+  },
+  "templates": [
+    {
+      "name": "mud_road_v2",
+      "pieceName": "$piece_levelground",
+      "usedFor": [
+        "Level",
+        "Smooth",
+        "Reset"
+      ],
+      "components": [
+        "Transform",
+        "Piece",
+        "TerrainOp",
+        "_GhostOnly child (inactive)"
+      ],
+      "znetView": false,
+      "groundPiece": true,
+      "canRotate": false,
+      "allowAltGroundPlacement": true,
+      "craftingStation": null,
+      "resources": [],
+      "terrainOp": {
+        "level": false,
+        "raise": false,
+        "smooth": true,
+        "smoothRadius": 3.0,
+        "paintCleared": true,
+        "paintType": "Dirt",
+        "paintRadius": 3.0,
+        "halfOffset": true,
+        "square": false
+      }
+    },
+    {
+      "name": "raise_v2",
+      "pieceName": "$piece_raise",
+      "usedFor": [
+        "Offset",
+        "Slope"
+      ],
+      "components": [
+        "Transform",
+        "Piece",
+        "TerrainOp",
+        "_GhostOnly child (inactive)"
+      ],
+      "znetView": false,
+      "groundPiece": true,
+      "canRotate": false,
+      "allowAltGroundPlacement": false,
+      "craftingStation": "piece_workbench",
+      "resources": [
+        {
+          "item": "Stone",
+          "amount": 2
+        }
+      ],
+      "terrainOp": {
+        "raise": true,
+        "raiseRadius": 2.0,
+        "raiseDelta": 1.0,
+        "raisePower": 0.1,
+        "levelOffset": 0.5,
+        "paintCleared": true,
+        "paintType": "Dirt",
+        "paintRadius": 2.5,
+        "square": false
+      }
+    },
+    {
+      "name": "path_v2",
+      "pieceName": "$piece_path",
+      "usedFor": [
+        "Path"
+      ],
+      "components": [
+        "Transform",
+        "Piece",
+        "TerrainOp",
+        "_GhostOnly child (inactive)"
+      ],
+      "znetView": false,
+      "groundPiece": true,
+      "canRotate": false,
+      "craftingStation": null,
+      "resources": [],
+      "terrainOp": {
+        "level": false,
+        "raise": false,
+        "smooth": false,
+        "paintCleared": true,
+        "paintType": "Dirt",
+        "paintRadius": 2.0,
+        "halfOffset": true,
+        "square": false
+      }
+    },
+    {
+      "name": "paved_road_v2",
+      "pieceName": "$piece_pavedroad",
+      "usedFor": [
+        "Paved"
+      ],
+      "components": [
+        "Transform",
+        "Piece",
+        "TerrainOp",
+        "_GhostOnly child (inactive)"
+      ],
+      "znetView": false,
+      "groundPiece": true,
+      "canRotate": false,
+      "allowAltGroundPlacement": true,
+      "craftingStation": "piece_stonecutter",
+      "resources": [
+        {
+          "item": "Stone",
+          "amount": 1
+        }
+      ],
+      "terrainOp": {
+        "smooth": true,
+        "smoothRadius": 3.0,
+        "paintCleared": true,
+        "paintType": "Paved",
+        "paintRadius": 2.2,
+        "square": false
+      }
+    }
+  ],
+  "runtimeCoverage": "None; piece registration, ghost visuals and icon rendering have not been observed."
+}

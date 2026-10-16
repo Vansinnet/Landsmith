@@ -1,0 +1,7 @@
+reference/
+bin/
+obj/
+**/bin/
+**/obj/
+.vs/
+*.user

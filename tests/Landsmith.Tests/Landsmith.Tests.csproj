@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Portable tests for game-independent logic. Link production files; never reference game assemblies here. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../src/Landsmith/Core/*.cs" LinkBase="Core" />
+  </ItemGroup>
+</Project>

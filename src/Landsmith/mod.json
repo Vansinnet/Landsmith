@@ -1,0 +1,12 @@
+{
+  "description": "Fast terrain shaping for the Hoe: level, raise or lower, smooth, straight slopes, paths, paved roads and reset with circle or square brushes, soft edges, live preview and undo. Client-side; works on vanilla servers.",
+  "websiteUrl": "",
+  "installSide": "client",
+  "vanillaClientsSupported": true,
+  "runtimeStatus": "Runtime-pending",
+  "dependencies": [
+    "denikson-BepInExPack_Valheim-5.4.2351"
+  ],
+  "githubRepository": "Vansinnet/Landsmith",
+  "upstream": null
+}

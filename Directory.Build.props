@@ -1,0 +1,33 @@
+<Project>
+  <!--
+    Shared build settings for every project in the workspace.
+    Projects under src/ are BepInEx plugins for Valheim (net472). Projects under tests/ are portable test runners.
+  -->
+  <PropertyGroup>
+    <RepoRoot>$([MSBuild]::NormalizeDirectory('$(MSBuildThisFileDirectory)'))</RepoRoot>
+    <LangVersion>10.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Deterministic>true</Deterministic>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <!-- Keep local paths (user name, folders) out of released binaries and keep the product version exact. -->
+    <PathMap>$(RepoRoot)=/_/</PathMap>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <_ProjectRelativeDir>$([MSBuild]::MakeRelative('$(RepoRoot)', '$(MSBuildProjectDirectory)').Replace('\', '/'))</_ProjectRelativeDir>
+    <IsValheimMod Condition="'$(IsValheimMod)' == '' and $(_ProjectRelativeDir.StartsWith('src/'))">true</IsValheimMod>
+    <ValheimReferenceDir Condition="'$(ValheimReferenceDir)' == ''">$(RepoRoot)reference/assemblies/</ValheimReferenceDir>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(IsValheimMod)' == 'true'">
+    <TargetFramework>net472</TargetFramework>
+    <AssemblyName>$(MSBuildProjectName)</AssemblyName>
+    <RootNamespace>$(MSBuildProjectName)</RootNamespace>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(IsValheimMod)' == 'true'">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+</Project>

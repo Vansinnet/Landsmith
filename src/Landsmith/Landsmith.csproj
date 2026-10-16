@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Version>0.1.0</Version>
+    <PluginGuid>se.junge.valheim.landsmith</PluginGuid>
+    <PluginName>Landsmith</PluginName>
+  </PropertyGroup>
+  <ItemGroup>
+    <GameReference Include="BepInEx;0Harmony;assembly_valheim;assembly_utils;UnityEngine;UnityEngine.CoreModule;UnityEngine.IMGUIModule;UnityEngine.TextRenderingModule" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Tool icons are original artwork for this mod (see README); embedded so the release stays one DLL. -->
+    <EmbeddedResource Include="assets/icons/*.png" LogicalName="Landsmith.assets.icons.%(Filename)%(Extension)" />
+  </ItemGroup>
+</Project>
